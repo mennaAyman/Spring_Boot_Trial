@@ -1,0 +1,16 @@
+	public String sendMessage(String sender, String recipent, String message) {
+		User messageRecipent = userRepository.findByUserName(recipent);
+		if (messageRecipent != null) {
+			chatMessage.setMessage(message);
+			if ((messageRecipent.getStatus()).equals("online")) {
+				chatMessage.setMessageStatus("sent");
+				return "sent";
+			} else {
+				chatMessage.setMessageStatus("not sent");
+				return "not sent";
+			}
+		} else {
+			System.out.println("user not found, username is incorrect");
+			return "user not found, username is incorrect";
+		}
+	}
